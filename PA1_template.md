@@ -44,7 +44,6 @@ if ((!file.exists("./activity.csv"))) {
 }
 # Read in activity data
 activity_data <- read.csv("activity.csv", header = TRUE)
-#head(activity_data)
 ```
 #### 2. Preprocess Data to remove "NA" Results
 
@@ -52,7 +51,6 @@ activity_data <- read.csv("activity.csv", header = TRUE)
 # Find the complete cases and subset the data
 complete_cases_activity_data_index <- complete.cases(activity_data)
 complete_cases_activity_data <- subset(activity_data,complete_cases_activity_data_index)
-#head(complete_cases_activity_data)
 ```
 
 ### What is Mean Total Number of Steps Taken per Day?
@@ -61,7 +59,6 @@ complete_cases_activity_data <- subset(activity_data,complete_cases_activity_dat
 ```r
 # Count the total number of steps take per day
 total_number_of_steps_per_day <- aggregate(steps ~ date, complete_cases_activity_data, sum)
-#head(total_number_of_steps_per_day)
 ```
 #### 2. Make a Histogram of the Total Number of Steps Taken Each Day
 
@@ -84,7 +81,6 @@ median_number_of_steps <- median(total_number_of_steps_per_day$steps)
    
 ### What is the Average Daily Activity Pattern?
 #### 1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)  
-
 
 ```r
 # Split-out the step data by five minute intervals
@@ -149,11 +145,9 @@ hist(imputed_total_number_of_steps_per_day$steps, col = "blue", xlab = "Number o
 imputed_mean_number_of_steps <- mean(imputed_total_number_of_steps_per_day$steps)
 imputed_median_number_of_steps <- median(imputed_total_number_of_steps_per_day$steps)
 ```
-  
 
 ##### The mean of the imputed total number of steps per day: 10766.  
 ##### The median of the imputed total number of steps per day: 10766.  
-  
   
 ##### Do these values differ from the estimates from the first part of the assignment? 
 ##### Yes - but not significantly - while the means are still the same - the imputed median is one step higher then complete case data set.  

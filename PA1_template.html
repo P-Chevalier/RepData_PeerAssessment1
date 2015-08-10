@@ -238,7 +238,6 @@ if ((!file.exists(&quot;./activity.csv&quot;))) {
 }
 # Read in activity data
 activity_data &lt;- read.csv(&quot;activity.csv&quot;, header = TRUE)
-#head(activity_data)
 </code></pre>
 
 <h4>2. Preprocess Data to remove &ldquo;NA&rdquo; Results</h4>
@@ -246,7 +245,6 @@ activity_data &lt;- read.csv(&quot;activity.csv&quot;, header = TRUE)
 <pre><code class="r"># Find the complete cases and subset the data
 complete_cases_activity_data_index &lt;- complete.cases(activity_data)
 complete_cases_activity_data &lt;- subset(activity_data,complete_cases_activity_data_index)
-#head(complete_cases_activity_data)
 </code></pre>
 
 <h3>What is Mean Total Number of Steps Taken per Day?</h3>
@@ -255,7 +253,6 @@ complete_cases_activity_data &lt;- subset(activity_data,complete_cases_activity_
 
 <pre><code class="r"># Count the total number of steps take per day
 total_number_of_steps_per_day &lt;- aggregate(steps ~ date, complete_cases_activity_data, sum)
-#head(total_number_of_steps_per_day)
 </code></pre>
 
 <h4>2. Make a Histogram of the Total Number of Steps Taken Each Day</h4>

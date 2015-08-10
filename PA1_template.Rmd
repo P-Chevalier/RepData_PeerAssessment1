@@ -34,14 +34,12 @@ if ((!file.exists("./activity.csv"))) {
 }
 # Read in activity data
 activity_data <- read.csv("activity.csv", header = TRUE)
-#head(activity_data)
 ```
 #### 2. Preprocess Data to remove "NA" Results
 ```{r}
 # Find the complete cases and subset the data
 complete_cases_activity_data_index <- complete.cases(activity_data)
 complete_cases_activity_data <- subset(activity_data,complete_cases_activity_data_index)
-#head(complete_cases_activity_data)
 ```
 
 ### What is Mean Total Number of Steps Taken per Day?
@@ -49,7 +47,6 @@ complete_cases_activity_data <- subset(activity_data,complete_cases_activity_dat
 ```{r}
 # Count the total number of steps take per day
 total_number_of_steps_per_day <- aggregate(steps ~ date, complete_cases_activity_data, sum)
-#head(total_number_of_steps_per_day)
 ```
 #### 2. Make a Histogram of the Total Number of Steps Taken Each Day
 ```{r}
@@ -68,8 +65,8 @@ median_number_of_steps <- median(total_number_of_steps_per_day$steps)
    
 ### What is the Average Daily Activity Pattern?
 #### 1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)  
+```{r}  
 
-```{r}
 # Split-out the step data by five minute intervals
 complete_cases_activity_data_by_interval <- split(complete_cases_activity_data, complete_cases_activity_data$interval)
 # Compute the average steps per interval
@@ -122,11 +119,9 @@ hist(imputed_total_number_of_steps_per_day$steps, col = "blue", xlab = "Number o
 imputed_mean_number_of_steps <- mean(imputed_total_number_of_steps_per_day$steps)
 imputed_median_number_of_steps <- median(imputed_total_number_of_steps_per_day$steps)
 ```  
-  
 
 ##### The mean of the imputed total number of steps per day: `r imputed_mean_number_of_steps`.  
 ##### The median of the imputed total number of steps per day: `r imputed_median_number_of_steps`.  
-  
   
 ##### Do these values differ from the estimates from the first part of the assignment? 
 ##### Yes - but not significantly - while the means are still the same - the imputed median is one step higher then complete case data set.  
@@ -136,7 +131,8 @@ imputed_median_number_of_steps <- median(imputed_total_number_of_steps_per_day$s
 ### Are There Differences in Activity Patterns Between Weekdays and Weekends?
 #### For this part the weekdays() function may be of some help here. Use the dataset with the filled-in missing values for this part.  
 #### 1. Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.  
-```{r}
+```{r}  
+
 # Convert the date column character class data to date class data
 imputed_activity_data$date <- as.Date(strptime(imputed_activity_data$date, format="%Y-%m-%d")) 
 
@@ -157,6 +153,7 @@ for (i in 1:nrow(imputed_activity_data)) {
 #### 2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.  
 
 ```{r}  
+
 # Aggregate the imputed_activity_data by steps as a function of interval and day_of_the_week  
 weekday_vs_weekend_steps <- aggregate(imputed_activity_data$steps ~ imputed_activity_data$interval + imputed_activity_data$day_of_the_week, imputed_activity_data, mean)
 
